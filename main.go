@@ -19,7 +19,6 @@ func main() {
 }
 
 func getEvents(context *gin.Context) {
-
 	events := models.GetAllEvents()
 	context.JSON(http.StatusOK, events)
 }
@@ -30,7 +29,7 @@ func postEvents(context *gin.Context) {
 	err := context.ShouldBindJSON(&event)
 
 	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": "could not parse the Post request"})
+		context.JSON(http.StatusBadRequest, err)
 		return
 	}
 
