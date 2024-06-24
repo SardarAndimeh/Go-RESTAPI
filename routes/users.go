@@ -3,6 +3,7 @@ package routes
 import (
 	"net/http"
 	"project/REST_API/models"
+	"project/REST_API/utils"
 
 	"github.com/gin-gonic/gin"
 )
@@ -40,5 +41,12 @@ func login(context *gin.Context) {
 		context.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 		return
 	}
-	context.JSON(http.StatusOK, gin.H{"message": " Logged in!"})
+
+	token, err := utils.GenerateToken(user.Email, user.ID)
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "can't authenticate user !"})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"message": " Logged in!", "token": token})
 }
