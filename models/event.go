@@ -39,9 +39,9 @@ func (e Event) Save() error {
 
 }
 
-func DeleteAllEvents() error {
+func (event Event) DeleteEvent() error {
 
-	query := `DELETE FROM events `
+	query := `DELETE FROM events WHERE id = ?`
 	stmt, err := db.DB.Prepare(query)
 	if err != nil {
 		return err
@@ -49,7 +49,7 @@ func DeleteAllEvents() error {
 
 	defer stmt.Close()
 
-	_, err = stmt.Exec()
+	_, err = stmt.Exec(event.ID)
 
 	return err
 }

@@ -2,7 +2,7 @@ package routes
 
 import (
 	"net/http"
-	models "project/REST_API/events"
+	models "project/REST_API/models"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -89,12 +89,26 @@ func updateEvent(context *gin.Context) {
 
 }
 
-func deleteAllEvents(context *gin.Context) {
-	err := models.DeleteAllEvents()
+func deleteEvent(context *gin.Context) {
+
+	eventId, err := strconv.ParseInt(context.Param("id"), 10, 64)
 	if err != nil {
-		context.JSON(http.StatusInternalServerError, gin.H{"error message": "could not delete all rows"})
+		context.JSON(http.StatusBadRequest, gin.H{"message": "could not parse the event id"})
 		return
-	} else {
-		context.JSON(http.StatusInternalServerError, gin.H{"error message": "All rows are deleted"})
 	}
+
+	event, err := models.GetEventById(eventId)
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "could not fetch the event"})
+		return
+	}
+
+	err = event.DeleteEvent()
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "could not delete the event"})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"message": "event is deleted successfully !"})
+
 }

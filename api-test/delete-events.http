@@ -1,1 +1,1 @@
-GET http://localhost:8080/delete
+DELETE  http://localhost:8080/delete/12
