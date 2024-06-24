@@ -40,7 +40,7 @@ func postEvents(context *gin.Context) {
 	err := context.ShouldBindJSON(&event)
 
 	if err != nil {
-		context.JSON(http.StatusBadRequest, err)
+		context.JSON(http.StatusBadRequest, gin.H{"message ": "could not parse request data"})
 		return
 	}
 
