@@ -81,7 +81,7 @@ func GetAllEvents() ([]Event, error) {
 
 func GetEventById(id int64) (*Event, error) {
 
-	query := `SELECT * FROM events WHERE ID=?`
+	query := `SELECT * FROM events WHERE id = ?`
 	row := db.DB.QueryRow(query, id)
 
 	var event Event
@@ -90,6 +90,25 @@ func GetEventById(id int64) (*Event, error) {
 		return nil, err
 	}
 	return &event, nil
+
+}
+
+func (event Event) Update() error {
+
+	query := `
+	UPDATE events
+	SET name = ? , description = ? , location = ? , datetime = ?
+	WHERE id = ?
+	`
+	stmt, err := db.DB.Prepare(query)
+	if err != nil {
+		return err
+	}
+
+	defer stmt.Close()
+
+	_, err = stmt.Exec(event.Name, event.Description, event.Location, event.DateTime, event.ID)
+	return err
 
 }
 
