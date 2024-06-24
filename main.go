@@ -1,8 +1,12 @@
 package main
 
 import (
+<<<<<<< HEAD
 	"net/http"
 	models "project/REST_API/events"
+=======
+	"project/REST_API/routes"
+>>>>>>> 8e986f10914499cf35aed1d00ed73fe98c9c2b56
 
 	"project/REST_API/db"
 
@@ -14,12 +18,17 @@ func main() {
 	db.InitDB()
 	server := gin.Default()
 
+<<<<<<< HEAD
 	server.GET("/events", getEvents)
 	server.POST("/events", postEvents)
+=======
+	routes.RegisterRoutes(server)
+>>>>>>> 8e986f10914499cf35aed1d00ed73fe98c9c2b56
 
 	server.Run(":8080")
 
 }
+<<<<<<< HEAD
 
 func getEvents(context *gin.Context) {
 	events := models.GetAllEvents()
@@ -44,3 +53,5 @@ func postEvents(context *gin.Context) {
 	context.JSON(http.StatusCreated, gin.H{"message ": "event created :)", "event": event})
 
 }
+=======
+>>>>>>> 8e986f10914499cf35aed1d00ed73fe98c9c2b56

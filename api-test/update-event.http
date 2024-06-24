@@ -1,0 +1,9 @@
+PUT http://localhost:8080/update/13
+Content-Type: application/json
+
+{
+    "name": "just do it",
+    "description": "just do it",
+    "location": "test location",
+    "dateTime": "2024-06-17T17:44:50.000Z"
+}
