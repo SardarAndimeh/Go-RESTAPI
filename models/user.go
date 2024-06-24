@@ -1,8 +1,8 @@
 package models
 
 import (
-	"fmt"
 	"project/REST_API/db"
+	"project/REST_API/utils"
 )
 
 type User struct {
@@ -17,19 +17,24 @@ func (user User) Save() error {
 
 	stmt, err := db.DB.Prepare(query)
 	if err != nil {
-		return fmt.Errorf("failed to prepare query: %w", err)
+		return err
 	}
 
 	defer stmt.Close()
 
-	result, err := stmt.Exec(user.Email, user.Password)
+	hashedPassword, err := utils.HashPassword(user.Password)
 	if err != nil {
-		return fmt.Errorf("failed to execute query: %w", err)
+		return err
+	}
+
+	result, err := stmt.Exec(user.Email, hashedPassword)
+	if err != nil {
+		return err
 	}
 
 	userID, err := result.LastInsertId()
 	if err != nil {
-		return fmt.Errorf("failed to retrieve the last user id: %w ", err)
+		return err
 	}
 
 	user.ID = userID
