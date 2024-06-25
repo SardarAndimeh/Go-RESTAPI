@@ -19,12 +19,13 @@ func signup(context *gin.Context) {
 	}
 
 	err = user.Save()
+
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"message": "could not save user", "error": err})
 		return
 	}
 
-	context.JSON(http.StatusCreated, gin.H{"message": "user created successfully !"})
+	context.JSON(http.StatusCreated, gin.H{"message": "user created successfully !", "user ID": user.ID})
 
 }
 

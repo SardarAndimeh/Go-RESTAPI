@@ -11,7 +11,7 @@ type Event struct {
 	Description string    `binding:"required"`
 	Location    string    `binding:"required"`
 	DateTime    time.Time `binding:"required"`
-	UserId      int
+	UserId      int64
 }
 
 func (e *Event) Save() error {
@@ -110,7 +110,7 @@ func (event Event) Update() error {
 
 }
 
-func New(name string, desc string, loc string, dt time.Time, userId int) Event {
+func New(name string, desc string, loc string, dt time.Time, userId int64) Event {
 	return Event{
 		Name:        name,
 		Description: desc,
