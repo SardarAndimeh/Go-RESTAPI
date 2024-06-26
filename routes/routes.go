@@ -21,7 +21,7 @@ func RegisterRoutes(server *gin.Engine) {
 	authenticated.PUT("/update/:id", updateEvent)
 	authenticated.DELETE("/delete/:id", deleteEvent)
 	authenticated.POST("/events/:id/register", regiterForEvent)
-	//authenticated.DELETE("/events/:id/register")
+	authenticated.DELETE("/events/:id/cancel", cancelRegisteration)
 
 	server.POST("/signup", signup)
 	server.POST("/login", login)
