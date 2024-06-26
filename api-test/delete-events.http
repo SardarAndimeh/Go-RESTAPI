@@ -1,2 +1,2 @@
-DELETE  http://localhost:8080/delete/
+DELETE  http://localhost:8080/delete/6
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3Q0QGdhbWlsLmNvbSIsImV4cCI6MTcxOTQwNjk3MiwidXNlcklkIjo0fQ.zyxsBj-kpbvFWzgxEZV19xtEYKIlxTNq-Nao28SJFD0

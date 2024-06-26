@@ -51,3 +51,14 @@ func login(context *gin.Context) {
 
 	context.JSON(http.StatusOK, gin.H{"message": " Logged in!", "token": token, "user Id": user.ID})
 }
+
+func getUsers(context *gin.Context) {
+	users, err := models.GetAllUsers()
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"error message": "could not fetch users"})
+		return
+
+	}
+	context.JSON(http.StatusOK, users)
+
+}

@@ -1,10 +1,10 @@
 POST http://localhost:8080/events
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3Q0QGdhbWlsLmNvbSIsImV4cCI6MTcxOTM1Njk5NiwidXNlcklkIjo0fQ.MjOUB0QGY-GV6tquuFb7jF9ALaOLOHDmP7pkp7K6QaE
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3Q1QGdhbWlsLmNvbSIsImV4cCI6MTcxOTQwOTkyNSwidXNlcklkIjo1fQ.Q2TIrNhCPXjFMvZOiGgrc0OTpMtZdbKPYxYpDXlCor0
 
 {
-    "name": "test44444",
-    "description": "test Description 44444",
+    "name": "just do it ",
+    "description": "hey you 2",
     "location": "test location",
     "dateTime": "2024-06-17T17:44:50.000Z"
 }

@@ -14,6 +14,12 @@ type Event struct {
 	UserId      int64
 }
 
+type RegisteredEvent struct {
+	ID      int64
+	EventId int64
+	UserId  int64
+}
+
 func (e *Event) Save() error {
 
 	query := `INSERT INTO events (name, description,location,dateTime,user_id)
@@ -77,6 +83,29 @@ func GetAllEvents() ([]Event, error) {
 
 }
 
+func GetAllRegisteredEvents() ([]RegisteredEvent, error) {
+	query := `SELECT * FROM registerations`
+
+	rows, err := db.DB.Query(query)
+
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var registeredEvents []RegisteredEvent
+	for rows.Next() {
+		var registeredEvent RegisteredEvent
+		err := rows.Scan(&registeredEvent.ID, &registeredEvent.EventId, &registeredEvent.UserId)
+		if err != nil {
+			return nil, err
+		}
+		registeredEvents = append(registeredEvents, registeredEvent)
+	}
+
+	return registeredEvents, nil
+}
+
 func GetEventById(id int64) (*Event, error) {
 
 	query := `SELECT * FROM events WHERE id = ?`
@@ -118,4 +147,22 @@ func New(name string, desc string, loc string, dt time.Time, userId int64) Event
 		DateTime:    dt,
 		UserId:      userId,
 	}
+}
+
+func (e Event) Register(userId int64) error {
+
+	query := "INSERT INTO registerations (event_id, user_id) VALUES(?,?)"
+
+	stmt, err := db.DB.Prepare(query)
+	if err != nil {
+		return err
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(e.ID, userId)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
