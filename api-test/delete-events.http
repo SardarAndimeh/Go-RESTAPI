@@ -1,1 +1,2 @@
-DELETE  http://localhost:8080/delete/12
+DELETE  http://localhost:8080/delete/4
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3Q0QGdhbWlsLmNvbSIsImV4cCI6MTcxOTQwNDQzNywidXNlcklkIjo0fQ.Hu1-q5aqOixtJ9cltfvI6c3No-XaEKYnz5EMh0itHls
